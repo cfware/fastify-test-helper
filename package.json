@@ -4,6 +4,7 @@
 	"description": "Testing helper for @cfware/ava-selenium-manager with fastify",
 	"main": "index.js",
 	"scripts": {
+		"release": "standard-version --sign",
 		"test": "xo && nyc ava -sv"
 	},
 	"engines": {
@@ -38,6 +39,7 @@
 		"geckodriver": "^1.15.1",
 		"lighterhtml": "^0.9.1",
 		"nyc": "^13.3.0",
+		"standard-version": "^5.0.0",
 		"xo": "^0.24.0"
 	},
 	"xo": {
