@@ -6,55 +6,76 @@ const fastify = require('fastify');
 const fastifyStatic = require('fastify-static');
 const fastifyBabel = require('fastify-babel');
 
+function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
+	return {
+		babelrc: false,
+		configFile: false,
+		plugins: [
+			'istanbul',
+			['bare-import-rewrite', {
+				alwaysRootImport,
+				modulesDir: nodeModulesPrefix
+			}]
+		]
+	};
+}
+
+function fastifyTestDefaultPlugin(fastify, opts, next) {
+	opts.statics.forEach(staticOpts => {
+		fastify.register(fastifyStatic, staticOpts);
+	});
+
+	Object.entries(opts.getters || {}).forEach(([url, file]) => {
+		fastify.get(url, (_, reply) => reply.sendFile(file));
+	});
+
+	fastify.register(fastifyBabel, {
+		babelrc: opts.babelrc || defaultBabelRC(opts.nodeModulesPrefix),
+		maskError: false
+	});
+
+	next();
+}
+
 class FastifyTestHelper {
 	constructor(browserBuilder, opts = {}) {
 		this.browserBuilder = browserBuilder;
-		this.cwd = opts.cwd || process.cwd();
-		this.nodeModules = opts.nodeModules || path.resolve(this.cwd, 'node_modules');
-		this.basetestpath = opts.basetestpath || '/';
-		this.fixturesRoot = opts.fixturesRoot || path.resolve(this.cwd, 'test', 'fixtures');
-		this.customInit = opts.customInit || (() => {});
-		this.customGetters = opts.customGetters || {};
-		this.babelrc = opts.babelrc || FastifyTestHelper.DefaultBabelRC;
-	}
+		this.testsPrefix = opts.testsPrefix || '/';
+		this.fastifyPlugin = opts.fastifyPlugin || fastifyTestDefaultPlugin;
+		this.fastifyPluginOpts = opts.fastifyPluginOpts;
+		if (this.fastifyPlugin === fastifyTestDefaultPlugin && !this.fastifyPluginOpts) {
+			const decorateReply = false;
+			const cwd = opts.cwd || process.cwd();
+			const nodeModulesPrefix = opts.nodeModulesPrefix || '/node_modules';
 
-	static get DefaultBabelRC() {
-		return {
-			babelrc: false,
-			configFile: false,
-			plugins: [
-				'istanbul',
-				'bare-import-rewrite'
-			]
-		};
+			this.fastifyPluginOpts = {
+				statics: [
+					{
+						root: opts.sendFileRoot || cwd,
+						serve: false
+					},
+					{
+						root: opts.testsRoot || path.resolve(cwd, 'test', 'fixtures'),
+						prefix: this.testsPrefix,
+						decorateReply
+					},
+					{
+						root: opts.nodeModulesRoot || path.resolve(cwd, 'node_modules'),
+						prefix: nodeModulesPrefix,
+						decorateReply
+					},
+					...(opts.extraStatics || [])
+				],
+				getters: opts.customGetters,
+				nodeModulesPrefix,
+				babelrc: opts.babelrc
+			};
+		}
 	}
 
 	async daemonFactory() {
 		const daemon = fastify()
-			.register(fastifyStatic, {
-				root: this.cwd,
-				serve: false
-			})
-			.register(fastifyStatic, {
-				root: this.fixturesRoot,
-				prefix: this.basetestpath,
-				decorateReply: false
-			})
-			.register(fastifyStatic, {
-				root: this.nodeModules,
-				prefix: '/node_modules',
-				decorateReply: false
-			})
-			.register(fastifyBabel, {
-				babelrc: this.babelrc,
-				maskError: false
-			});
-
-		this.customInit(daemon);
-
-		Object.entries(this.customGetters).forEach(([url, file]) => {
-			daemon.get(url, (_, reply) => reply.sendFile(file));
-		});
+			.register(this.fastifyPlugin, this.fastifyPluginOpts);
 
 		await daemon.listen(0);
 
@@ -65,9 +86,13 @@ class FastifyTestHelper {
 		daemon.server.unref();
 	}
 
-	daemonGetURL(t, daemon, pathname) {
-		return `http://localhost:${daemon.server.address().port}${this.basetestpath}${pathname}`;
+	daemonGetURL(daemon, pathname) {
+		return `http://localhost:${daemon.server.address().port}${this.testsPrefix}${pathname}`;
 	}
 }
 
-module.exports = FastifyTestHelper;
+module.exports = {
+	defaultBabelRC,
+	fastifyTestDefaultPlugin,
+	FastifyTestHelper
+};
