@@ -20,7 +20,7 @@ npm i -D @cfware/ava-selenium-manager @cfware/fastify-test-helper
 
 ```js
 import {builderFirefox, page, setup} from '@cfware/ava-selenium-manager';
-import FastifyTestHelper from '@cfware/fastify-test-helper';
+import {FastifyTestHelper} from '@cfware/fastify-test-helper';
 
 page('index.html', t => {
 	// Test index.html here
@@ -40,24 +40,23 @@ See tests in [@cfware/full-center] for a real life usage example.
 
 Sets the current working directory, default `process.cwd()`.
 
-### options.nodeModules
+### options.nodeModulesPrefix
 
-Sets the local directory to serve under the URL `/node_modules`.
+The base path to serve node_modules. Default `/node_modules`.
+
+### options.nodeModulesRoot
+
+Sets the local directory to serve under `options.nodeModulesPrefix`.
 Default to `node_modules` under `options.cwd`.
 
-### options.basetestpath
+### options.testsPrefix
 
 The base path which contains pages to be tested. Default `/`.
 
-### options.fixturesRoot
+### options.testsRoot
 
-Points to files which should be served under `options.basetestpath`.
+Points to files which should be served under `options.testsPrefix`.
 Default to `test/fixtures` under `options.cwd`.
-
-### options.customInit(daemon)
-
-This callback can be used to register additional routes with the fastify
-daemon.
 
 ### options.customGetters
 
@@ -78,12 +77,14 @@ prevent serving parent directories.
 
 ### options.babelrc
 
-By default:
-* Ignore .babelrc and babel.config.js
-* Enable [babel-plugin-istanbul] and [babel-plugin-bare-import-rewrite] plugins.
+Ignores any `.babelrc` and `babel.config.js` settings by default.
 
-If `options.babelrc` is provided this replaces the default options.  Default
-options can be retrieved from `FastifyTestHelper.DefaultBabelRC` and merged
+The following plugins are enabled by default:
+* [babel-plugin-istanbul]
+* [babel-plugin-bare-import-rewrite]
+
+If `options.babelrc` is provided it replaces the default settings.  Default
+options can be retrieved from the `defaultBabelRC` named export and merged
 using `Object.assign` or ES2018 object spread.
 
 ## Running tests
