@@ -5,6 +5,7 @@ const path = require('path');
 const fastify = require('fastify');
 const fastifyStatic = require('fastify-static');
 const fastifyBabel = require('fastify-babel');
+const glob = require('glob');
 
 function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 	return {
@@ -91,8 +92,16 @@ class FastifyTestHelper {
 	}
 }
 
+function globToCustomGetters(pattern, options) {
+	return glob.sync(pattern, options).reduce((acc, file) => ({
+		...acc,
+		[`/${file}`]: file
+	}), {});
+}
+
 module.exports = {
 	defaultBabelRC,
 	fastifyTestDefaultPlugin,
-	FastifyTestHelper
+	FastifyTestHelper,
+	globToCustomGetters
 };
