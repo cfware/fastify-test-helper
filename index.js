@@ -12,12 +12,16 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 		babelrc: false,
 		configFile: false,
 		plugins: [
-			'istanbul',
 			['bare-import-rewrite', {
 				alwaysRootImport,
 				modulesDir: nodeModulesPrefix
 			}]
-		]
+		],
+		env: {
+			test: {
+				plugins: ['istanbul']
+			}
+		}
 	};
 }
 
