@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.2](https://github.com/cfware/fastify-test-helper/compare/v0.2.1...v0.2.2) (2019-03-22)
+
+
+### Features
+
+* Add babel-plugin-remove-ungap. ([b8ae6d3](https://github.com/cfware/fastify-test-helper/commit/b8ae6d3))
+* Add support for class properties and private methods. ([b1615ac](https://github.com/cfware/fastify-test-helper/commit/b1615ac))
+
+
+
 ## [0.2.1](https://github.com/cfware/fastify-test-helper/compare/v0.2.0...v0.2.1) (2019-03-18)
 
 
