@@ -11,11 +11,22 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 	return {
 		babelrc: false,
 		configFile: false,
+		parserOpts: {
+			plugins: [
+				'objectRestSpread',
+				'importMeta',
+				'classProperties',
+				'classPrivateProperties',
+				'classPrivateMethods'
+			]
+		},
 		plugins: [
 			['bare-import-rewrite', {
 				alwaysRootImport,
 				modulesDir: nodeModulesPrefix
-			}]
+			}],
+			['@babel/plugin-proposal-class-properties', {loose: true}],
+			['@babel/plugin-proposal-private-methods', {loose: true}]
 		],
 		env: {
 			test: {

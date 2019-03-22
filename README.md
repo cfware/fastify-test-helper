@@ -82,6 +82,15 @@ Ignores any `.babelrc` and `babel.config.js` settings by default.
 The following plugins are enabled by default:
 * [babel-plugin-istanbul]
 * [babel-plugin-bare-import-rewrite]
+* [@babel/plugin-proposal-class-properties] (loose mode)
+* [@babel/plugin-proposal-private-methods] (loose mode)
+
+The following [parser plugins] are enabled by default:
+* objectRestSpread
+* importMeta
+* classProperties
+* classPrivateProperties
+* classPrivateMethods
 
 If `options.babelrc` is provided it replaces the default settings.  Default
 options can be retrieved from the `defaultBabelRC` named export and merged
@@ -107,3 +116,6 @@ npm test
 [@cfware/full-center]: https://github.com/cfware/full-center
 [babel-plugin-istanbul]: https://github.com/istanbuljs/babel-plugin-istanbul#readme
 [babel-plugin-bare-import-rewrite]: https://github.com/cfware/babel-plugin-bare-import-rewrite#readme
+[@babel/plugin-proposal-class-properties]: https://www.npmjs.com/package/@babel/plugin-proposal-class-properties
+[@babel/plugin-proposal-private-methods]: https://www.npmjs.com/package/@babel/plugin-proposal-private-methods
+[parser plugins]: https://babeljs.io/docs/en/babel-parser#plugins
