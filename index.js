@@ -21,6 +21,7 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 			]
 		},
 		plugins: [
+			'remove-ungap',
 			['bare-import-rewrite', {
 				alwaysRootImport,
 				modulesDir: nodeModulesPrefix

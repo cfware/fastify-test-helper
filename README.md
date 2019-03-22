@@ -80,6 +80,7 @@ prevent serving parent directories.
 Ignores any `.babelrc` and `babel.config.js` settings by default.
 
 The following plugins are enabled by default:
+* [babel-plugin-remove-ungap]
 * [babel-plugin-istanbul]
 * [babel-plugin-bare-import-rewrite]
 * [@babel/plugin-proposal-class-properties] (loose mode)
@@ -114,6 +115,7 @@ npm test
 [downloads-url]: https://npmjs.org/package/@cfware/fastify-test-helper
 [license-image]: https://img.shields.io/npm/l/@cfware/fastify-test-helper.svg
 [@cfware/full-center]: https://github.com/cfware/full-center
+[babel-plugin-remove-ungap]: https://github.com/cfware/babel-plugin-remove-ungap#readme
 [babel-plugin-istanbul]: https://github.com/istanbuljs/babel-plugin-istanbul#readme
 [babel-plugin-bare-import-rewrite]: https://github.com/cfware/babel-plugin-bare-import-rewrite#readme
 [@babel/plugin-proposal-class-properties]: https://www.npmjs.com/package/@babel/plugin-proposal-class-properties
