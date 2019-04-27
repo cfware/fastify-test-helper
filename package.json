@@ -41,7 +41,7 @@
 		"@cfware/eslint-config-browser": "^0.2.1",
 		"ava": "^1.4.1",
 		"geckodriver": "^1.16.2",
-		"lighterhtml": "^0.9.4",
+		"lighterhtml": "^0.10.0",
 		"nyc": "^14.1.0",
 		"standard-version": "^5.0.2",
 		"xo": "^0.24.0"
