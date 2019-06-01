@@ -39,7 +39,7 @@
 	"devDependencies": {
 		"@cfware/ava-selenium-manager": "^0.2.1",
 		"@cfware/eslint-config-browser": "^0.3.0",
-		"ava": "^1.4.1",
+		"ava": "^2.0.0",
 		"geckodriver": "^1.16.2",
 		"lighterhtml": "^0.12.0",
 		"nyc": "^14.1.0",
