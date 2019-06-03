@@ -56,7 +56,7 @@ The base path which contains pages to be tested. Default `/`.
 ### options.testsRoot
 
 Points to files which should be served under `options.testsPrefix`.
-Default to `test/fixtures` under `options.cwd`.
+Default to `fixtures` under `options.cwd`.
 
 ### options.customGetters
 

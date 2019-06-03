@@ -72,7 +72,7 @@ class FastifyTestHelper {
 						serve: false
 					},
 					{
-						root: opts.testsRoot || path.resolve(cwd, 'test', 'fixtures'),
+						root: opts.testsRoot || path.resolve(cwd, 'fixtures'),
 						prefix: this.testsPrefix,
 						decorateReply
 					},
