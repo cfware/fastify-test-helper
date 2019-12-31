@@ -38,13 +38,13 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 }
 
 function fastifyTestDefaultPlugin(fastify, opts, next) {
-	opts.statics.forEach(staticOpts => {
+	for (const staticOpts of opts.statics) {
 		fastify.register(fastifyStatic, staticOpts);
-	});
+	}
 
-	Object.entries(opts.getters || {}).forEach(([url, file]) => {
+	for (const [url, file] of Object.entries(opts.getters || {})) {
 		fastify.get(url, (_, reply) => reply.sendFile(file));
-	});
+	}
 
 	fastify.register(fastifyBabel, {
 		babelrc: opts.babelrc || defaultBabelRC(opts.nodeModulesPrefix),

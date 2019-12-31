@@ -10,7 +10,7 @@ Testing helper for @cfware/ava-selenium-manager with fastify
 
 ### Install @cfware/fastify-test-helper
 
-This module requires node.js 8 or above.
+This module requires node.js 12 or above.
 
 ```sh
 npm i -D @cfware/ava-selenium-manager @cfware/fastify-test-helper
