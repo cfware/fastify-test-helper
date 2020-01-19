@@ -37,7 +37,7 @@
 		"@cfware/ava-selenium-manager": "^0.3.0",
 		"@cfware/eslint-config-browser": "^0.4.2",
 		"@cfware/nyc": "^0.6.0",
-		"ava": "^2.4.0",
+		"ava": "^3.0.0",
 		"geckodriver": "^1.19.1",
 		"lighterhtml": "^2.0.8",
 		"nyc": "^15.0.0",
