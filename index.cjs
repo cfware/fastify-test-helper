@@ -15,9 +15,7 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 			plugins: [
 				'objectRestSpread',
 				'importMeta',
-				'classProperties',
-				'classPrivateProperties',
-				'classPrivateMethods'
+				'classProperties'
 			]
 		},
 		plugins: [
@@ -26,8 +24,8 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 				alwaysRootImport,
 				modulesDir: nodeModulesPrefix
 			}],
-			['@babel/plugin-proposal-class-properties', {loose: true}],
-			['@babel/plugin-proposal-private-methods', {loose: true}]
+			['@babel/plugin-proposal-optional-chaining', {loose: true}],
+			['@babel/plugin-proposal-nullish-coalescing-operator', {loose: true}]
 		],
 		env: {
 			test: {
@@ -37,17 +35,17 @@ function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 	};
 }
 
-function fastifyTestDefaultPlugin(fastify, opts, next) {
-	for (const staticOpts of opts.statics) {
-		fastify.register(fastifyStatic, staticOpts);
+function fastifyTestDefaultPlugin(fastify, options, next) {
+	for (const staticOptions of options.statics) {
+		fastify.register(fastifyStatic, staticOptions);
 	}
 
-	for (const [url, file] of Object.entries(opts.getters || {})) {
+	for (const [url, file] of Object.entries(options.getters || {})) {
 		fastify.get(url, (_, reply) => reply.sendFile(file));
 	}
 
 	fastify.register(fastifyBabel, {
-		babelrc: opts.babelrc || defaultBabelRC(opts.nodeModulesPrefix),
+		babelrc: options.babelrc || defaultBabelRC(options.nodeModulesPrefix),
 		maskError: false
 	});
 
@@ -55,37 +53,37 @@ function fastifyTestDefaultPlugin(fastify, opts, next) {
 }
 
 class FastifyTestHelper {
-	constructor(browserBuilder, opts = {}) {
+	constructor(browserBuilder, options = {}) {
 		this.browserBuilder = browserBuilder;
-		this.testsPrefix = opts.testsPrefix || '/';
-		this.fastifyPlugin = opts.fastifyPlugin || fastifyTestDefaultPlugin;
-		this.fastifyPluginOpts = opts.fastifyPluginOpts;
+		this.testsPrefix = options.testsPrefix || '/';
+		this.fastifyPlugin = options.fastifyPlugin || fastifyTestDefaultPlugin;
+		this.fastifyPluginOpts = options.fastifyPluginOpts;
 		if (this.fastifyPlugin === fastifyTestDefaultPlugin && !this.fastifyPluginOpts) {
 			const decorateReply = false;
-			const cwd = opts.cwd || process.cwd();
-			const nodeModulesPrefix = opts.nodeModulesPrefix || '/node_modules';
+			const cwd = options.cwd || process.cwd();
+			const nodeModulesPrefix = options.nodeModulesPrefix || '/node_modules';
 
 			this.fastifyPluginOpts = {
 				statics: [
 					{
-						root: opts.sendFileRoot || cwd,
+						root: options.sendFileRoot || cwd,
 						serve: false
 					},
 					{
-						root: opts.testsRoot || path.resolve(cwd, 'fixtures'),
+						root: options.testsRoot || path.resolve(cwd, 'fixtures'),
 						prefix: this.testsPrefix,
 						decorateReply
 					},
 					{
-						root: opts.nodeModulesRoot || path.resolve(cwd, 'node_modules'),
+						root: options.nodeModulesRoot || path.resolve(cwd, 'node_modules'),
 						prefix: nodeModulesPrefix,
 						decorateReply
 					},
-					...(opts.extraStatics || [])
+					...(options.extraStatics || [])
 				],
-				getters: opts.customGetters,
+				getters: options.customGetters,
 				nodeModulesPrefix,
-				babelrc: opts.babelrc
+				babelrc: options.babelrc
 			};
 		}
 	}
@@ -109,10 +107,13 @@ class FastifyTestHelper {
 }
 
 function globToCustomGetters(pattern, options) {
-	return glob.sync(pattern, options).reduce((acc, file) => ({
-		...acc,
-		[`/${file}`]: file
-	}), {});
+	const files = glob.sync(pattern, options);
+	const result = {};
+	for (const file of files) {
+		result[`/${file}`] = file;
+	}
+
+	return result;
 }
 
 module.exports = {
