@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/cfware/fastify-test-helper/compare/v0.4.0...v0.5.0) (2020-02-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove class property transformations
+* Remove private property / method parser plugins
+
+### Features
+
+* Add optional chaining and nullish coalescing plugins ([755607b](https://github.com/cfware/fastify-test-helper/commit/755607bf893dd751113c1d741cd3ea733b87b913))
+
 ## [0.4.0](https://github.com/cfware/fastify-test-helper/compare/v0.3.0...v0.4.0) (2019-12-31)
 
 
