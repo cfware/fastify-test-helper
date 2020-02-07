@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/cfware/fastify-test-helper/compare/v0.5.0...v0.6.0) (2020-02-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* This is a total rewrite.
+
+### Features
+
+* Rewrite to support ESM consumers ([1c4e5d0](https://github.com/cfware/fastify-test-helper/commit/1c4e5d0d00c30d7e97e8a1dac8cf5895bd609a4f))
+
 ## [0.5.0](https://github.com/cfware/fastify-test-helper/compare/v0.4.0...v0.5.0) (2020-02-06)
 
 
