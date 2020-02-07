@@ -1,20 +1,21 @@
 import path from 'path';
 
-import {builderFirefox, page, setup} from '@cfware/ava-selenium-manager';
-import {FastifyTestHelper} from '../index.cjs';
-import {testImplementation} from './_test-implementation.js';
+import t from 'libtap';
+import {testBrowser} from '@cfware/tap-selenium-manager';
+import {FastifyTestHelper} from '../index.js';
+import {fixtureDirectory, projectDirectory, testImplementation} from './_helpers.js';
 
-page('index.html', testImplementation);
-page('alias.html', testImplementation);
-
-const testsRoot = path.resolve(__dirname, '..', 'fixtures');
-
-setup(new FastifyTestHelper(builderFirefox, {
-	cwd: testsRoot,
-	nodeModulesRoot: path.resolve(__dirname, '..', 'node_modules'),
+const daemon = new FastifyTestHelper({
+	cwd: fixtureDirectory,
+	nodeModulesRoot: path.join(projectDirectory, 'node_modules'),
 	nodeModulesPrefix: '/assets',
-	testsRoot,
+	testsRoot: fixtureDirectory,
 	customGetters: {
 		'/alias.html': 'index.html'
 	}
-}));
+});
+
+testBrowser(t, 'firefox', daemon, {
+	'index.html': testImplementation,
+	'alias.html': testImplementation
+});

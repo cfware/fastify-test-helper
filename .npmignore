@@ -1,10 +1,9 @@
 *.tgz
 node_modules
 coverage
-.nyc_output
-nyc.config.cjs
 package
 .eslintrc.json
 .travis.yml
 fixtures
+test.js
 test

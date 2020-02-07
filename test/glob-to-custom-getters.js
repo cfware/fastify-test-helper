@@ -1,17 +1,14 @@
-import path from 'path';
-import test from 'ava';
+import t from 'libtap';
+import {globToCustomGetters} from '../index.js';
+import {projectDirectory as cwd} from './_helpers.js';
 
-import {globToCustomGetters} from '../index.cjs';
-
-const cwd = path.resolve(__dirname, '..');
-
-test('matching glob', t => {
-	t.deepEqual(globToCustomGetters('{index.cjs,package.json}', {cwd}), {
-		'/index.cjs': 'index.cjs',
+t.test('matching glob', async t => {
+	t.same(globToCustomGetters('{index.js,package.json}', {cwd}), {
+		'/index.js': 'index.js',
 		'/package.json': 'package.json'
 	});
 });
 
-test('non-matching glob', t => {
-	t.deepEqual(globToCustomGetters('missing.js', {cwd}), {});
+t.test('non-matching glob', async t => {
+	t.same(globToCustomGetters('missing.js', {cwd}), {});
 });

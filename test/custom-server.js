@@ -1,20 +1,15 @@
-import path from 'path';
-
+import t from 'libtap';
+import {testBrowser} from '@cfware/tap-selenium-manager';
 import fastifyStatic from 'fastify-static';
-import {builderFirefox, page, setup} from '@cfware/ava-selenium-manager';
-import {FastifyTestHelper} from '../index.cjs';
-import {testImplementation} from './_test-implementation.js';
+import {FastifyTestHelper} from '../index.js';
+import {fixtureDirectory, testImplementation} from './_helpers.js';
 
-page('custom-server-fail.html', testImplementation);
-
-const testsRoot = path.resolve(__dirname, '..', 'fixtures');
-
-setup(new FastifyTestHelper(builderFirefox, {
-	cwd: testsRoot,
-	testsRoot,
+const daemon = new FastifyTestHelper({
+	cwd: fixtureDirectory,
+	fixtureDirectory,
 	fastifyPlugin(fastify, options, next) {
 		fastify.register(fastifyStatic, {
-			root: testsRoot,
+			root: fixtureDirectory,
 			prefix: '/',
 			serve: false
 		});
@@ -30,4 +25,8 @@ setup(new FastifyTestHelper(builderFirefox, {
 	fastifyPluginOpts: {
 		checkOpts: true
 	}
-}));
+});
+
+testBrowser(t, 'firefox', daemon, {
+	'custom-server-fail.html': testImplementation
+});
