@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/cfware/fastify-test-helper/compare/v0.6.0...v0.7.0) (2020-02-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove nullish operator support
+
+### Bug Fixes
+
+* Remove nullish operator support ([2c4dab2](https://github.com/cfware/fastify-test-helper/commit/2c4dab243d339c69ae68b34f21c096837ebd8aa4))
+
 ## [0.6.0](https://github.com/cfware/fastify-test-helper/compare/v0.5.0...v0.6.0) (2020-02-07)
 
 
