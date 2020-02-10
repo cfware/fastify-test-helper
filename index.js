@@ -23,7 +23,6 @@ export function defaultBabelRC(nodeModulesPrefix, alwaysRootImport = ['**']) {
 				modulesDir: nodeModulesPrefix
 			}],
 			['@babel/plugin-proposal-optional-chaining', {loose: true}],
-			['@babel/plugin-proposal-nullish-coalescing-operator', {loose: true}],
 			['babel-plugin-istanbul']
 		]
 	};
