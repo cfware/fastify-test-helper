@@ -40,7 +40,7 @@
 		"@cfware/tap-selenium-manager": "^0.1.0",
 		"c8": "^7.0.1",
 		"geckodriver": "^1.19.1",
-		"libtap": "^0.2.0",
+		"libtap": "^0.3.0",
 		"lighterhtml": "^2.0.8",
 		"standard-version": "^7.0.1",
 		"tap-yaml-summary": "^0.1.0"
