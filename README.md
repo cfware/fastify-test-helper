@@ -98,7 +98,7 @@ using `Object.assign` or ES2018 object spread.
 
 [npm-image]: https://img.shields.io/npm/v/@cfware/fastify-test-helper.svg
 [npm-url]: https://npmjs.org/package/@cfware/fastify-test-helper
-[tests-status]: https://github.com/cfware/node-preload/workflows/Tests/badge.svg
+[tests-status]: https://github.com/cfware/fastify-test-helper/workflows/Tests/badge.svg
 [gk-image]: https://badges.greenkeeper.io/cfware/fastify-test-helper.svg
 [downloads-image]: https://img.shields.io/npm/dm/@cfware/fastify-test-helper.svg
 [downloads-url]: https://npmjs.org/package/@cfware/fastify-test-helper
