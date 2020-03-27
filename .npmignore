@@ -3,7 +3,7 @@ node_modules
 coverage
 package
 .eslintrc.json
-.travis.yml
+.github
 fixtures
 test.js
 test
