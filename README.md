@@ -1,6 +1,6 @@
 # @cfware/fastify-test-helper
 
-[![Travis CI][travis-image]][travis-url]
+![Tests][tests-status]
 [![Greenkeeper badge][gk-image]](https://greenkeeper.io/)
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
@@ -22,10 +22,6 @@ npm i -D @cfware/tap-selenium-manager @cfware/fastify-test-helper
 import t from 'libtap';
 import {testBrowser} from '@cfware/tap-selenium-manager';
 import {FastifyTestHelper} from '@cfware/fastify-test-helper';
-
-page('index.html', t => {
-	// Test index.html here
-});
 
 testBrowser(t, 'firefox', new FastifyTestHelper(), {
   async 'index.html'(t, selenium) {
@@ -69,9 +65,9 @@ This object is used to register custom GET URL's to a local path.
 Example:
 ```js
 {
-	customGetters: {
-		'/url.js': 'index.js'
-	}
+  customGetters: {
+    '/url.js': 'index.js'
+  }
 }
 ```
 
@@ -102,8 +98,7 @@ using `Object.assign` or ES2018 object spread.
 
 [npm-image]: https://img.shields.io/npm/v/@cfware/fastify-test-helper.svg
 [npm-url]: https://npmjs.org/package/@cfware/fastify-test-helper
-[travis-image]: https://travis-ci.org/cfware/fastify-test-helper.svg?branch=master
-[travis-url]: https://travis-ci.org/cfware/fastify-test-helper
+[tests-status]: https://github.com/cfware/node-preload/workflows/Tests/badge.svg
 [gk-image]: https://badges.greenkeeper.io/cfware/fastify-test-helper.svg
 [downloads-image]: https://img.shields.io/npm/dm/@cfware/fastify-test-helper.svg
 [downloads-url]: https://npmjs.org/package/@cfware/fastify-test-helper
