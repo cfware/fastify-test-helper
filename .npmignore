@@ -1,7 +1,6 @@
 *.tgz
 node_modules
 coverage
-package
 .eslintrc.json
 .github
 fixtures
