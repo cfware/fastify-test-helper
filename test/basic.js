@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import t from 'libtap';
 import {testBrowser} from '@cfware/tap-selenium-manager';

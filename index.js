@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
@@ -59,29 +59,29 @@ export class FastifyTestHelper {
 
 		if (options.fastifyPlugin === fastifyTestDefaultPlugin && !options.fastifyPluginOpts) {
 			const decorateReply = false;
-			const {cwd, nodeModulesPrefix} = options;
+			const {babelrc, cwd, customGetters, extraStatics, nodeModulesPrefix, nodeModulesRoot, sendFileRoot, testsRoot} = options;
 
 			options.fastifyPluginOpts = {
 				statics: [
 					{
-						root: options.sendFileRoot || cwd,
+						root: sendFileRoot || cwd,
 						serve: false
 					},
 					{
-						root: options.testsRoot || path.resolve(cwd, 'fixtures'),
+						root: testsRoot || path.resolve(cwd, 'fixtures'),
 						prefix: this.testsPrefix,
 						decorateReply
 					},
 					{
-						root: options.nodeModulesRoot || path.resolve(cwd, 'node_modules'),
+						root: nodeModulesRoot || path.resolve(cwd, 'node_modules'),
 						prefix: nodeModulesPrefix,
 						decorateReply
 					},
-					...options.extraStatics
+					...extraStatics
 				],
-				getters: options.customGetters,
+				getters: customGetters,
 				nodeModulesPrefix,
-				babelrc: options.babelrc
+				babelrc
 			};
 		}
 	}
