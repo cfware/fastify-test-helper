@@ -1,7 +1,7 @@
 import path from 'path';
 
 import fastify from 'fastify';
-import fastifyStatic from 'fastify-static';
+import fastifyStatic from '@fastify/static';
 import fastifyBabel from 'fastify-babel';
 import glob from 'glob';
 
@@ -90,7 +90,7 @@ export class FastifyTestHelper {
 		this._daemon = fastify()
 			.register(this._options.fastifyPlugin, this._options.fastifyPluginOpts);
 
-		await this._daemon.listen(0);
+		await this._daemon.listen();
 	}
 
 	async stop() {

@@ -1,6 +1,6 @@
 import t from 'libtap';
 import {testBrowser} from '@cfware/tap-selenium-manager';
-import fastifyStatic from 'fastify-static';
+import fastifyStatic from '@fastify/static';
 import {FastifyTestHelper} from '../index.js';
 import {fixtureDirectory, testImplementation} from './_helpers.js';
 
