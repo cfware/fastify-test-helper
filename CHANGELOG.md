@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/cfware/fastify-test-helper/compare/v0.7.0...v0.8.0) (2022-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update dependencies
+
+### Features
+
+* Update dependencies ([f1a26d9](https://github.com/cfware/fastify-test-helper/commit/f1a26d9570ef6144dbbb51478ef67ce38c7c5092))
+
 ## [0.7.0](https://github.com/cfware/fastify-test-helper/compare/v0.6.0...v0.7.0) (2020-02-10)
 
 

@@ -1,6 +1,6 @@
 {
 	"name": "@cfware/fastify-test-helper",
-	"version": "0.7.0",
+	"version": "0.8.0",
 	"description": "Testing helper for @cfware/tap-selenium-manager with fastify",
 	"main": "index.js",
 	"type": "module",
