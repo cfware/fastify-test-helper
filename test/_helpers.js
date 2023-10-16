@@ -5,7 +5,7 @@ export const projectDirectory = path.resolve(path.dirname(fileURLToPath(import.m
 export const fixtureDirectory = path.join(projectDirectory, 'fixtures');
 
 export async function testImplementation(t, selenium) {
-	const element = await selenium.findElement({id: 'test'});
+    const element = await selenium.findElement({id: 'test'});
 
-	t.equal(await element.getText(), 'Test text');
+    t.equal(await element.getText(), 'Test text');
 }
